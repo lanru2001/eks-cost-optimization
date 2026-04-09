@@ -1,7 +1,6 @@
 ## EKS Cost Optimization Approach — Automated Scaling with K8s CronJobs
 
-This cost savings solution uses Kubernetes CronJobs to automatically scale down all deployments across namespaces used to host applications during off-peak hours and weekend, and it scales them back up during peak hours.
-The solution is expected to reduce compute cost on our EKS Managed Node Group and Karpenter Worker Nodes respectively. In addition, it helps to reduce resource consumption and cloud costs in non-production environment.
+This cost savings solution uses Kubernetes CronJobs to automatically scale down all deployments across namespaces used to host applications during off-peak hours and weekend, and it scales them back up during peak hours. The solution is expected to reduce compute consumption and cloud cost on our EKS Managed Node Group and Karpenter Worker Nodes respectively.
 
 ## How it works 
 
