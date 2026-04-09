@@ -1,4 +1,4 @@
-## Kubernetes Dev Cluster — Automated Scaling with K8s CronJobs
+## EKS Cost Optimization Approach — Automated Scaling with K8s CronJobs
 
 This cost savings solution uses Kubernetes CronJobs to automatically scale down all deployments across namespaces used to host applications during off-peak hours and weekend, and it scales them back up during peak hours.
 The solution is expected to reduce compute cost on our EKS Managed Node Group and Karpenter Worker Nodes respectively. In addition, it helps to reduce resource consumption and cloud costs in non-production environment.
@@ -13,7 +13,7 @@ scale-down-weekends	    hourly	   Sat–Sun	    Enforce 0 replicas across all na
 ```
 The weekend CronJob runs hourly to guard against any accidental manual scale-ups during the weekend.
 
-# Repository Structure
+## Repository Structure
 ```
 .
 ├── rbac.yaml                          # ServiceAccount, ClusterRole, ClusterRoleBinding
@@ -23,7 +23,7 @@ The weekend CronJob runs hourly to guard against any accidental manual scale-ups
 
 ```
 
-# RBAC
+## RBAC
 
 All CronJobs use a single ServiceAccount named deployment-scaler created in the kube-system namespace. A ClusterRole and ClusterRoleBinding grant it the minimum permissions needed to operate across all namespaces.
 
