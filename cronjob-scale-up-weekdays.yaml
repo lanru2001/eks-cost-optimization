@@ -1,0 +1,59 @@
+---
+
+# cronjob-scale-up-weekdays.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-up-business-hours
+  namespace: kube-system  
+spec:
+  schedule: "0 6 * * 1-5"         # Mon–Fri at 06:00 EST
+  timeZone: "America/New_York"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: deployment-scaler
+          restartPolicy: OnFailure
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Business hours scale-up: $(date)"
+
+                  NAMESPACES=$(kubectl get namespaces \
+                    --field-selector='metadata.name!=kube-system,metadata.name!=kube-public,metadata.name!=kube-node-lease' \
+                    -o jsonpath='{.items[*].metadata.name}')
+
+                  if [ -z "$NAMESPACES" ]; then
+                    echo "No namespaces found. Exiting."
+                    exit 1
+                  fi
+
+                  for ns in $NAMESPACES; do
+                    echo "Processing namespace: $ns"
+
+                    DEPLOYMENTS=$(kubectl get deployments -n "$ns" \
+                      -o jsonpath='{.items[*].metadata.name}')
+
+                    if [ -z "$DEPLOYMENTS" ]; then
+                      echo "  No deployments found in $ns, skipping."
+                      continue
+                    fi
+
+                    for deploy in $DEPLOYMENTS; do
+                      REPLICAS=$(kubectl get deployment/"$deploy" -n "$ns" \
+                        -o jsonpath='{.metadata.annotations.desired-replicas}')
+                      REPLICAS="${REPLICAS:-2}"
+                      echo "  Scaling $deploy in $ns to $REPLICAS replicas"
+                      kubectl scale deployment/"$deploy" -n "$ns" --replicas="$REPLICAS"
+                    done
+                  done
+
+                  echo "Scale-up complete."
