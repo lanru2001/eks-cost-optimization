@@ -34,3 +34,6 @@ The scripts automatically exclude Kubernetes system namespaces from scaling clus
 - kube-system
 - kube-public
 - kube-node-lease
+
+<img width="1423" height="420" alt="Screenshot 2026-04-09 at 5 29 10 PM" src="https://github.com/user-attachments/assets/a606e19b-0834-4b43-980b-fd106fcf9b5c" />
+
