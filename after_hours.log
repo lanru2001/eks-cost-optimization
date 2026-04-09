@@ -1,0 +1,23 @@
+# These logs validate that it works 
+
+After-hours scale-down: Thu Apr  9 21:27:40 UTC 2026
+Processing namespace: amazon-guardduty
+  No deployments found in amazon-guardduty, skipping.
+Processing namespace: default
+  Scaling coffee in default to 0
+deployment.apps/coffee scaled
+  Scaling tea in default to 0
+deployment.apps/tea scaled
+Processing namespace: external-dns
+  Scaling external-dns in external-dns to 0
+deployment.apps/external-dns scaled
+Processing namespace: mc-namespace
+  No deployments found in mc-namespace, skipping.
+Processing namespace: nginx-app
+  Scaling nginx in nginx-app to 0
+deployment.apps/nginx scaled
+Processing namespace: nginx-gateway
+  Scaling nginx-gateway in nginx-gateway to 0
+deployment.apps/nginx-gateway scaled
+Processing namespace: project-tiger
+  No deployments found in project-tiger, skipping.
