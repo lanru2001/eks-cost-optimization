@@ -35,5 +35,10 @@ The scripts automatically exclude Kubernetes system namespaces from scaling clus
 - kube-public
 - kube-node-lease
 
+# Peak time
+<img width="1430" height="441" alt="Screenshot 2026-04-10 at 10 08 14 AM" src="https://github.com/user-attachments/assets/e10509f8-2543-497f-8f81-aa8eaa5c9e70" />
+
+# Off-peak time 
 <img width="1423" height="420" alt="Screenshot 2026-04-09 at 5 29 10 PM" src="https://github.com/user-attachments/assets/a606e19b-0834-4b43-980b-fd106fcf9b5c" />
 
+# Weekends 
